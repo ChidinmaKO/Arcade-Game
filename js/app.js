@@ -1,12 +1,15 @@
+const modal = document.querySelector(".modal");
+const closeButton = document.querySelector(".close");
+
 // Enemies our player must avoid
-var Enemy = function(x, y, speed) {
+const Enemy = function(x, y, speed) {
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
     this.x = x;
     this.y = y;
     this.gameWidth = 505;
     this.gameHeight = 606;
-    this.speed = 150;
+    this.speed = 100;
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
     this.sprite = 'images/enemy-bug.png';
@@ -26,7 +29,7 @@ Enemy.prototype.update = function(dt) {
 
     if (this.x > this.gameWidth) {
         this.x = -100;
-        this.speed = 150 + Math.floor(Math.random() * 220);
+        this.speed = 100 + Math.floor(Math.random() * 220);
         // console.log(this.speed);
     }
 
@@ -47,7 +50,7 @@ Enemy.prototype.render = function() {
 // Now write your own player class
 // This class requires an update(), render() and
 // a handleInput() method.
-var Player = function(x, y) {
+const Player = function(x, y) {
     this.x = x;
     this.y = y;
     this.sprite = 'images/char-cat-girl.png';
@@ -79,14 +82,17 @@ Player.prototype.handleInput = function(keyPress) {
             player.x = 202;
             player.y = 405;
         }, 500);
+        toggleModal();
+        
+
     }
 };
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
-var allEnemies = [new Enemy(-200, 58), new Enemy(-150, 145), new Enemy(-300, 224), new Enemy(605, 141)];
+const allEnemies = [new Enemy(-200, 58), new Enemy(-150, 145), new Enemy(-300, 224), new Enemy(605, 141)];
 // Place the player object in a variable called player
-var player = new Player(202, 405);
+const player = new Player(202, 405);
 
 
 // This listens for key presses and sends the keys to your
@@ -101,3 +107,17 @@ document.addEventListener('keyup', function(e) {
 
     player.handleInput(allowedKeys[e.keyCode]);
 });
+
+const toggleModal = () => {
+    modal.classList.toggle("show-modal");
+}
+
+function windowOnClick(evt) {
+    if (evt.target === modal) {
+        modal.style.display = 'none';
+    }
+}
+
+modal.addEventListener("click", toggleModal);
+
+window.addEventListener("click", windowOnClick);

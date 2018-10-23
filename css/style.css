@@ -1,3 +1,77 @@
+html {
+    box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}
+
 body {
     text-align: center;
+    font-family: 'Lato', sans-serif;
+    font-size: 22px;
+    background-color: #f64f59;
+}
+
+h2 {
+    color: #24243e;
+    font-size: 2.8rem;
+    text-shadow: 1px 1px 1px #24243e;
+}
+
+h3{
+    color: #24243e;
+    font-size: 1.8rem;
+    text-shadow: 1px 1px 1px #24243e;
+}
+
+.modal {
+    position:fixed;
+    left: 0;
+    top: 0;
+    width:100%;
+    height:100%;
+    background: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(1.1);
+    cursor: pointer;
+    transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform 0.25s;
+}
+
+.modal-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #ffffff;
+    padding: 1rem 1rem;
+    width: 20rem;
+    border-radius: 10px;
+}
+
+.close {
+    float: right;
+    width: 1.5rem;
+    line-height: 1.5rem;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 0.25rem;
+    background: #0f0c29;
+	color: #FFFFFF;
+	font-weight: bold;
+    box-shadow: 1px 1px 3px #0f0c29;
+}
+
+.close:hover {
+    background: #24243e;
+}
+
+.show-modal {
+    opacity: 2;
+    visibility: visible;
+    transform: scale(1.0);
+    transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s;
 }
