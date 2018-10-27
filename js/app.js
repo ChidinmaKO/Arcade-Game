@@ -1,5 +1,7 @@
-const modal = document.querySelector(".modal");
-const closeButton = document.querySelector(".close");
+'use strict';
+
+const modal = document.querySelector('.modal');
+const closeButton = document.querySelector('.close');
 
 // Enemies our player must avoid
 const Enemy = function(x, y, speed) {
@@ -33,6 +35,7 @@ Enemy.prototype.update = function(dt) {
         // console.log(this.speed);
     }
 
+    // check for collisions and return player back if there is a collision
     if (player.x < this.x + 80 &&
         player.x + 80 > this.x &&
         player.y < this.y + 60 &&
@@ -53,14 +56,14 @@ Enemy.prototype.render = function() {
 const Player = function(x, y) {
     this.x = x;
     this.y = y;
-    this.sprite = 'images/char-cat-girl.png';
+    this.player = 'images/char-cat-girl.png';
 };
 
 Player.prototype.update = function(dt) {
 };
 
 Player.prototype.render = function() {
-    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+    ctx.drawImage(Resources.get(this.player), this.x, this.y);
 };
 
 Player.prototype.handleInput = function(keyPress) {
@@ -78,13 +81,7 @@ Player.prototype.handleInput = function(keyPress) {
     }
     
     if (this.y < 0) {
-        setTimeout(function () {
-            player.x = 202;
-            player.y = 405;
-        }, 500);
-        toggleModal();
-        
-
+        reset();
     }
 };
 
@@ -109,7 +106,7 @@ document.addEventListener('keyup', function(e) {
 });
 
 const toggleModal = () => {
-    modal.classList.toggle("show-modal");
+    modal.classList.toggle('show-modal');
 }
 
 function windowOnClick(evt) {
@@ -118,6 +115,15 @@ function windowOnClick(evt) {
     }
 }
 
-modal.addEventListener("click", toggleModal);
+modal.addEventListener('click', toggleModal);
 
-window.addEventListener("click", windowOnClick);
+window.addEventListener('click', windowOnClick);
+
+const reset = () => {
+    setTimeout(() => {
+        player.x = 202;
+        player.y = 405;
+    }, 500);
+
+    toggleModal();
+}
